@@ -10,9 +10,9 @@ phases:
       - make validate
   build:
     commands:
-      - echo "success?"
+      - make package
   post_build:
     commands:
-      - echo "success?"
+      - make deploy
 
 
