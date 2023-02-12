@@ -14,15 +14,12 @@ package:
 		--s3-bucket $(BUCKET) \
 		--s3-prefix $(PREFIX) \
 		--output-template-file build/cloudformation-template.yml \
-		--region ap-northeast-1 --profile $(PROFILE)
 
 deploy:
 	aws cloudformation deploy \
 		--template-file ./build/cloudformation-template.yml \
 		--stack-name $(STACK_NAME) \
 		--capabilities CAPABILITY_NAMED_IAM CAPABILITY_AUTO_EXPAND \
-		--region ap-northeast-1 \
-		--profile $(PROFILE)
 
 all: package deploy
 
