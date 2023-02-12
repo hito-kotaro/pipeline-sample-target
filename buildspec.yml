@@ -7,11 +7,12 @@ phases:
   pre_build:
     commands:
       - mkdir -p build
+      - make validate
   build:
     commands:
-      - aws cloudformation package --template-file ./cloudformation.yml --s3-bucket cfn-build-objects --s3-prefix pipieline-sample-target --output-template-file build/cloudformation-template.yml 
+      - echo "success?"
   post_build:
     commands:
-      - aws cloudformation deploy --template-file ./build/cloudformation-template.yml --stack-name pipieline-sample-target --capabilities CAPABILITY_NAMED_IAM CAPABILITY_AUTO_EXPAND
+      - echo "success?"
 
 
