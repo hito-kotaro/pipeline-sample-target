@@ -6,10 +6,19 @@ phases:
       - echo "install"
   pre_build:
     commands:
-      - echo "pre build"
+      - mkdir -p build
   build:
     commands:
-      - echo "build"
+      - 	aws cloudformation package \
+          --template-file ./cloudformation.yml \
+          --s3-bucket cfn-build-objects \
+          --s3-prefix pipieline-sample-target \
+          --output-template-file build/cloudformation-template.yml \
+
   post_build:
     commands:
-      - echo "post"
+      - 	aws cloudformation deploy \
+          --template-file ./build/cloudformation-template.yml \
+          --stack-name pipieline-sample-target \
+          --capabilities CAPABILITY_NAMED_IAM CAPABILITY_AUTO_EXPAND \
+          --region ap-northeast-1 \
